@@ -1,0 +1,163 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="style.css">
+    <script defer src="script.js"></script>
+</head>
+<body>
+    <h1>Solver Utils</h1>
+    <hr />
+    <hr />
+
+    <h2>Karnaugh Map Solver</h2>
+    <div class="flex">
+        <div class="container">
+            <h2>Karnaugh Map Inputs</h2>
+            <form id="kmapForm" onsubmit="solveKmap(); return false;">
+                <div class="input-section">
+                    <label for="numVariables">Number of Variables:</label>
+                    <input type="number" id="numVariables" min="2" max="6" value="3">
+                </div>
+                <div class="input-section">
+                    <label for="inputType">Input Datatype</label>
+                    <select id="inputType" onchange="updateInputLabels()">
+                        <option value="minterms" selected>Minterms</option>
+                        <option value="maxterms">Maxterms</option>
+                        <option value="expression">Logic Expression</option>
+                    </select>
+                </div>
+
+                <div class="input-section">
+                    <label for="terms" id="mintermsLabel">Minterms (comma-separated):</label>
+                    <label for="terms" id="maxtermsLabel" style="display: none;">Maxterms (comma-separated):</label>
+                    <label for="terms" id="expressionLabel" style="display: none;">Logic Expression:</label>
+                    <input type="text" id="terms" placeholder="e.g., 0,1,2,5,6,7">
+
+                    <label for="dontCares">Don't Cares:</label>
+                    <input type="text" id="dontCares" placeholder="e.g., 0,1,2,5,6,7">
+                </div>
+                <input type="submit" id="solveButton" value="Solve" />
+            </form>
+            <div id="result"></div>
+        </div>
+        <div class="container">
+            <h2>Kmap:</h2>
+            <div class="kmapContainer flex flex-start">
+                <table id="4InKmapTable" class="kmap" border="1">
+                    <!-- Karnaugh map will be generated here -->
+                    <tr>
+                        <th></th>
+                        <th>00</th>
+                        <th>01</th>
+                        <th>11</th>
+                        <th>10</th>
+                        <th>ab</th>
+                    </tr>
+                    <tr class="~c~d data-row">
+                        <th>00</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr class="~cd data-row">
+                        <th>01</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr class="cd data-row">
+                        <th>11</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr class="c~d data-row">
+                        <th>10</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr>
+                        <th>cd</th>
+                    </tr>
+                </table>
+                <table id="3InKmapTable" class="kmap" border="1">
+                    <!-- Karnaugh map will be generated here -->
+                    <tr>
+                        <th></th>
+                        <th>00</th>
+                        <th>01</th>
+                        <th>11</th>
+                        <th>10</th>
+                        <th>ab</th>
+                    </tr>
+                    <tr class="~c data-row">
+                        <th>0</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr class="c data-row">
+                        <th>1</th>
+                        <td class="~a~b"></td>
+                        <td class="~ab"></td>
+                        <td class="ab"></td>
+                        <td class="a~b"></td>
+                    </tr>
+                    <tr>
+                        <th>c</th>
+                    </tr>
+                </table>
+                <table id="2InKmapTable" class="kmap" border="1">
+                    <!-- Karnaugh map will be generated here -->
+                    <tr>
+                        <th></th>
+                        <th>0</th>
+                        <th>1</th>
+                        <th>a</th>
+                    </tr>
+                    <tr class="~b data-row">
+                        <th>0</th>
+                        <td class="~a"></td>
+                        <td class="a"></td>
+                    </tr>
+                    <tr class="b data-row">
+                        <th>1</th>
+                        <td class="~a"></td>
+                        <td class="a"></td>
+                    </tr>
+                    <tr>
+                        <th>b</th>
+                    </tr>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <hr />
+
+    <h2>Boolean Expression Tester</h2>
+    <div class="flex">
+        <div class="container">
+            <label for="booleanExpression">Enter Boolean Expression:</label>
+            <input type="text" name="booleanExpression" onchange="updateInputVariables(event)" id="booleanExpression" placeholder="e.g., A*B + C'">
+            <h4>Output: <span id="outputValue"></span></h4>
+
+            <h3>Variables</h3>
+            <div class="input-section" id="variableSection">
+                <!-- Variable inputs will be generated here based on the expression -->
+            </div>
+            <button onclick="testBooleanExpression()">Test Expression</button>
+        </div>
+    </div>
+    
+</body>
+</html>

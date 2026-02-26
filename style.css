@@ -1,0 +1,29 @@
+.input-section {
+    padding-inline: 1rem;
+}
+.flex {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+@media (max-width: 600px) {
+    .flex {
+        flex-direction: column;
+    }
+}
+
+.flex-start {
+    align-items: flex-start;
+}
+
+#variableSection input {
+    display: inline-block;
+}
+
+.container {
+    padding-inline: 1rem;
+}
+h3 {
+    margin: 0;
+}
