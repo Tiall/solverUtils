@@ -1,3 +1,5 @@
+# SolverUtils
+A simple app that provides simple "solver" tools for various problems.
 ## Current Applications
 ### Kmap solver
 - Allows Inputs from:
